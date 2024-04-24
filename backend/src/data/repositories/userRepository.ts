@@ -1,17 +1,21 @@
 import { Prisma } from '@prisma/client';
 import { Context } from '../context';
 
+export interface User extends Prisma.usersCreateInput {};
+
 export interface UserRepository {
-  create : (user: Prisma.usersCreateInput, context: Context) => any,
+  create : (user: User, context: Context) => any,
   findById : (id : number, context : Context) => any,
   findByName : (username : string, context : Context) => any
 }
 
 
+
+
 export const userRepository : UserRepository = {
 
 
-  create: async (user : Prisma.usersCreateInput, context : Context) => {
+  create: async (user : User, context : Context) => {
     let result = null;
     try{
       result =  await context.client.users.create({data : user});
@@ -23,6 +27,8 @@ export const userRepository : UserRepository = {
           // console.log(
           //   'There is a unique constraint violation, a new user cannot be created with this email'
           // )
+          return null;
+
         }
       }
       throw e;
