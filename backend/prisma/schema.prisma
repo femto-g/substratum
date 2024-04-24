@@ -20,5 +20,5 @@ model users {
   user_id                           Int        @id @default(autoincrement())
   username                          String     @unique
   hashed_password                   Bytes
-  salt                              Bytes
+   salt                              Bytes
 }
