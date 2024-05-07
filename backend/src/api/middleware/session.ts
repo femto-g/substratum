@@ -1,9 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import { PrismaSessionStore } from '@quixo3/prisma-session-store';
 import session, {SessionOptions} from 'express-session';
-import { createContext } from '../../data/context';
 
-const context = createContext();
 const store = new PrismaSessionStore(
  	new PrismaClient(),
   {

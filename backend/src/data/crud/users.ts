@@ -1,21 +1,18 @@
 import { Context, createContext } from "../context";
 import {User, userRepository, UserRepository} from "../repositories/userRepository"
 
+export interface UserCrud {
+  (index : any) : Promise<User | null>
+}
+
 const context = createContext();
-const repo = userRepository;
 
 export async function mockCreateUser(param : User, context : Context, repo : UserRepository) {
   return await repo.create(param, context);
 }
 
 export async function createUser(user : User) {
-  let result = null;
-  try {
-    result = await mockCreateUser(user, context, userRepository);
-  } catch (e) {
-    throw e;
-  }
-  return result;
+  return await mockCreateUser(user, context, userRepository);
 }
 
 export async function mockFindUserById(id : number, context : Context, repo : UserRepository) {
@@ -23,13 +20,7 @@ export async function mockFindUserById(id : number, context : Context, repo : Us
 }
 
 export async function findUserById(id : number){
-  let result = null;
-  try {
-    result = await mockFindUserById(id, context, userRepository);
-  } catch (e) {
-    throw e;
-  }
-  return result;
+  return await mockFindUserById(id, context, userRepository);
 }
 
 export async function mockFindUserByName(username : string, context : Context, repo : UserRepository) {
@@ -37,11 +28,5 @@ export async function mockFindUserByName(username : string, context : Context, r
 }
 
 export async function findUserByName(username : string){
-  let result = null;
-  try {
-    result = await mockFindUserByName(username, context, userRepository);
-  } catch (e) {
-    throw e;
-  }
-  return result;
+  return await mockFindUserByName(username, context, userRepository);
 }

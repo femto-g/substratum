@@ -1,7 +1,6 @@
 import express, { Express, Request, Response } from 'express';
 export const app : Express = express();
 import http from "http";
-import session from "express-session";
 export const httpServer = http.createServer(app);
 import {router as authRouter} from './api/routes/auth';
 import passport from 'passport';

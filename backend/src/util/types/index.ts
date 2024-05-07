@@ -8,3 +8,7 @@ declare namespace Express {
      logout?: any
   }
 }
+
+export interface Service {
+  (req : Request) : any
+}

@@ -1,7 +1,7 @@
 import passportLocal from 'passport-local';
 import passport from 'passport';
 import { cryptoPbkdf2 } from '../../util/promisified';
-import { createUser, findUserByName } from '../../data/crud/users';
+import { UserCrud, createUser, findUserByName } from '../../data/crud/users';
 import { User } from '../../data/repositories/userRepository';
 import crypto from 'crypto';
 import { Request, Response } from 'express';
@@ -13,10 +13,12 @@ import { Request, Response } from 'express';
 
 const LocalStrategy = passportLocal.Strategy;
 
-passport.use(new LocalStrategy(async function verify(username, password, done) {
-  //done() is the function passed to passport.authenticate()
+export async function mockVerify(username : string, password : string, done : any, find: UserCrud) {
   try {
-    const result : User = await findUserByName(username);
+    const result = await find(username);
+    if(!result){
+      return done(null, false);
+    }
     const hashedPassword = await cryptoPbkdf2(password, result.salt, 310000, 32, 'sha256');
     if (!crypto.timingSafeEqual(result.hashed_password, hashedPassword)) {
       return done(null, false, { message: 'Incorrect username or password.' });
@@ -26,13 +28,18 @@ passport.use(new LocalStrategy(async function verify(username, password, done) {
   } catch (error) {
     return done(error);
   }
+}
 
-}));
+async function verify(username : string, password : string, done : any) {
+  return await mockVerify(username, password, done, findUserByName);
+}
+
+passport.use(new LocalStrategy(verify));
 
 passport.serializeUser((user : any, done) => {
   const serializedUser = {
     username: user.username,
-    id: user.user_id
+    id: user.id
   }
   done(null, serializedUser);
 });
@@ -74,7 +81,7 @@ export function logout(req : Request){
 
 }
 
-export async function signup(req : Request) {
+async function mockSignup(req : Request, create : UserCrud) {
   const salt = crypto.randomBytes(16);
   const username = req.body.username;
   const hashed_password = await cryptoPbkdf2(req.body.password, salt, 310000, 32, 'sha256');
@@ -83,7 +90,7 @@ export async function signup(req : Request) {
     hashed_password,
     salt
   }
-  const result = await createUser(user);
+  const result = await create(user);
   if(!result){
     return false;
   }
@@ -94,6 +101,10 @@ export async function signup(req : Request) {
     //console.log(`logged in as ${user.username}`);
     return true;
   });
+}
+
+export async function signup(req : Request){
+  return mockSignup(req, createUser);
 }
 
 export function session(req : Request){
