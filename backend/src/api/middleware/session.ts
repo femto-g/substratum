@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { PrismaSessionStore } from '@quixo3/prisma-session-store';
-import {SessionOptions} from 'express-session';
+import session, {SessionOptions} from 'express-session';
 import { createContext } from '../../data/context';
 
 const context = createContext();
@@ -24,3 +24,5 @@ const sessionOptions : SessionOptions = {
 	saveUninitialized: true,
 	store: store
 	}
+
+export const sessionMiddleware = session(sessionOptions);
