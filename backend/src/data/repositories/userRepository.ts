@@ -41,7 +41,7 @@ export const userRepository : UserRepository = {
     let result = null;
     const where = { 
       where : {
-        user_id : id
+        id : id
       }
     };
 

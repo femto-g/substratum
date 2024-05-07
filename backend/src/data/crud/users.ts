@@ -8,10 +8,10 @@ export async function mockCreateUser(param : User, context : Context, repo : Use
   return await repo.create(param, context);
 }
 
-export async function createUser(param : any) {
+export async function createUser(user : User) {
   let result = null;
   try {
-    result = await mockCreateUser(param, context, userRepository);
+    result = await mockCreateUser(user, context, userRepository);
   } catch (e) {
     throw e;
   }

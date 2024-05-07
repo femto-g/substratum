@@ -4,6 +4,7 @@ import { cryptoPbkdf2 } from '../../util/promisified';
 import { createUser, findUserByName } from '../../data/crud/users';
 import { User } from '../../data/repositories/userRepository';
 import crypto from 'crypto';
+import { Request, Response } from 'express';
 
 // helpful links 
 // http://toon.io/understanding-passportjs-authentication-flow/
@@ -31,7 +32,7 @@ passport.use(new LocalStrategy(async function verify(username, password, done) {
 passport.serializeUser((user : any, done) => {
   const serializedUser = {
     username: user.username,
-    user_id: user.user_id
+    id: user.user_id
   }
   done(null, serializedUser);
 });
@@ -42,7 +43,7 @@ passport.deserializeUser((user : any, done) => {
 });
 
 
-export function login(req : Express.Request){
+export function login(req : Request){
   let result = false;
   passport.authenticate('local', (err: any, user: Express.User, info: any) => {
     if(err){
@@ -65,7 +66,7 @@ export function login(req : Express.Request){
   return result;
 }
 
-export function logout(req : any){
+export function logout(req : Request){
   req.logout((err : any) => {
     if(err) throw err;
     return true;
@@ -73,7 +74,7 @@ export function logout(req : any){
 
 }
 
-export async function signup(req : any) {
+export async function signup(req : Request) {
   const salt = crypto.randomBytes(16);
   const username = req.body.username;
   const hashed_password = await cryptoPbkdf2(req.body.password, salt, 310000, 32, 'sha256');
@@ -95,7 +96,7 @@ export async function signup(req : any) {
   });
 }
 
-export function session(req : any){
+export function session(req : Request){
   if(req.user){
     return true;
   }

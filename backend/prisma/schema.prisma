@@ -7,17 +7,15 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
-model session {
-  sid    String   @id @db.VarChar
-  sess   Json     @db.Json
-  expire DateTime @db.Timestamp(6)
-
-  @@index([expire], map: "IDX_session_expire")
+model Session {
+  id        String   @id
+  sid       String   @unique
+  data      String
+  expiresAt   DateTime
 }
 
 model users {
-  user_id                           Int        @id @default(autoincrement())
+  id                           Int        @id @default(autoincrement())
   username                          String     @unique
   hashed_password                   Bytes
    salt                              Bytes

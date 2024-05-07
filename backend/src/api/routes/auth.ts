@@ -1,9 +1,12 @@
 import Router from 'express-promise-router';
 import { login, signup, logout, session} from '../../biz/services/auth';
-import { loginMiddleware, signupMiddleware } from '../middleware/auth';
+import { loginMiddleware, sessionMiddleware, signupMiddleware } from '../middleware/auth';
 
-const router = Router();
+export const router = Router();
 
 router.post('/login', loginMiddleware);
 router.post('/signup', signupMiddleware);
+router.post('/session', sessionMiddleware);
+
+
 
