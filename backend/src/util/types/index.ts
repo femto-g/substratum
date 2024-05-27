@@ -1,3 +1,4 @@
+import { Request } from "express"
 import { User } from "../../data/repositories/userRepository"
 
 //allows you to access these properties in req.user in express middleware

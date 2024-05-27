@@ -9,13 +9,15 @@ export interface UserRepository {
   findByName : (username : string, context : Context) => any
 }
 
+export interface UserRepositoryFunction {
+  (index : any, context: Context) : Promise<User | null>
+}
 
 
 
-export const userRepository : UserRepository = {
 
 
-  create: async (user : User, context : Context) : Promise<User | null> => {
+   export async function create(user : User, context : Context) : Promise<User | null> {
     let result = null;
     try{
       result =  await context.client.users.create({data : user});
@@ -35,9 +37,9 @@ export const userRepository : UserRepository = {
     }
     return result;
 
-  },
+  }
 
-  findById: async (id : number, context : Context) : Promise<User | null> => {
+  export async function findById (id : number, context : Context) : Promise<User | null> {
     let result = null;
     const where = { 
       where : {
@@ -54,9 +56,9 @@ export const userRepository : UserRepository = {
     }
 
     return result;
-  },
+  }
 
-  findByName: async (username : string, context : Context) : Promise<User | null> => {
+   export async function findByName (username : string, context : Context) : Promise<User | null> {
     let result = null;
     const where = { 
       where : {
@@ -74,4 +76,3 @@ export const userRepository : UserRepository = {
     return result;
   }
 
-}

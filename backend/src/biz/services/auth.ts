@@ -1,7 +1,7 @@
 import passportLocal from 'passport-local';
 import passport from 'passport';
 import { cryptoPbkdf2 } from '../../util/promisified';
-import { UserCrud, createUser, findUserByName } from '../../data/crud/users';
+import { UserCrudFunction, createUser, findUserByName } from '../../data/crud/users';
 import { User } from '../../data/repositories/userRepository';
 import crypto from 'crypto';
 import { Request, Response } from 'express';
@@ -13,7 +13,7 @@ import { Request, Response } from 'express';
 
 const LocalStrategy = passportLocal.Strategy;
 
-export async function mockVerify(username : string, password : string, done : any, find: UserCrud) {
+export async function mockVerify(username : string, password : string, done : any, find: UserCrudFunction) {
   try {
     const result = await find(username);
     if(!result){
@@ -81,7 +81,7 @@ export function logout(req : Request){
 
 }
 
-async function mockSignup(req : Request, create : UserCrud) {
+async function mockSignup(req : Request, create : UserCrudFunction) {
   const salt = crypto.randomBytes(16);
   const username = req.body.username;
   const hashed_password = await cryptoPbkdf2(req.body.password, salt, 310000, 32, 'sha256');
