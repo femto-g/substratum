@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { routeAsyncCatch } from "../../util/helpers";
-import { login, signup, logout, session} from '../../biz/services/auth';
+import { login, signup, logout, session} from '../../service/auth';
 import { Service } from "../../util/types";
 
 
@@ -45,7 +45,7 @@ export async function mockSessionMiddleware(req : Request, res : Response, next 
 }
 
 export async function rawSessionMiddleware(req : Request, res : Response, next : NextFunction) {
-  return mockSignupMiddleware(req, res, next, session);
+  return mockSessionMiddleware(req, res, next, session);
 }
 
 export const sessionMiddleware = routeAsyncCatch(rawSessionMiddleware);

@@ -1,10 +1,11 @@
 import passportLocal from 'passport-local';
 import passport from 'passport';
-import { cryptoPbkdf2 } from '../../util/promisified';
-import { UserCrudFunction, createUser, findUserByName } from '../../data/crud/users';
-import { User } from '../../data/repositories/userRepository';
+import { cryptoPbkdf2 } from '../util/promisified';
+import { UserCrudFunction, createUser, findUserByName } from '../data/crud/users';
+import { User } from '../data/repositories/userRepository';
 import crypto from 'crypto';
 import { Request, Response } from 'express';
+import { hashPassword } from '../util/helpers';
 
 // helpful links 
 // http://toon.io/understanding-passportjs-authentication-flow/
@@ -19,9 +20,9 @@ export async function mockVerify(username : string, password : string, done : an
     if(!result){
       return done(null, false);
     }
-    const hashedPassword = await cryptoPbkdf2(password, result.salt, 310000, 32, 'sha256');
+    const hashedPassword = await hashPassword(password, result.salt);
     if (!crypto.timingSafeEqual(result.hashed_password, hashedPassword)) {
-      return done(null, false, { message: 'Incorrect username or password.' });
+      return done(null, false);
     }
     return done(null, result);
 
@@ -81,10 +82,10 @@ export function logout(req : Request){
 
 }
 
-async function mockSignup(req : Request, create : UserCrudFunction) {
+export async function mockSignup(req : Request, create : UserCrudFunction) {
   const salt = crypto.randomBytes(16);
   const username = req.body.username;
-  const hashed_password = await cryptoPbkdf2(req.body.password, salt, 310000, 32, 'sha256');
+  const hashed_password = await hashPassword(req.body.password, salt);
   const user : User = {
     username,
     hashed_password,
