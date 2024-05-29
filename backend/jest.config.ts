@@ -3,7 +3,7 @@
  * https://jestjs.io/docs/configuration
  */
 
-import type {Config} from 'jest';
+import type { Config } from "jest";
 
 const config: Config = {
   // All imported modules in your tests should be mocked automatically
@@ -183,10 +183,12 @@ const config: Config = {
   // transform: undefined,
 
   transform: {
-    '^.+\\.tsx?$': ['ts-jest',
-    {
-      tsconfig: 'tsconfig.base.json'
-    }]
+    "^.+\\.tsx?$": [
+      "ts-jest",
+      {
+        tsconfig: "tsconfig.base.json",
+      },
+    ],
   },
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
@@ -200,7 +202,7 @@ const config: Config = {
 
   // Indicates whether each individual test should be reported during the run
   // verbose: undefined,
-    verbose: true
+  verbose: true,
 
   // An array of regexp patterns that are matched against all source file paths before re-running tests in watch mode
   // watchPathIgnorePatterns: [],
