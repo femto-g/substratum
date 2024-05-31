@@ -16,15 +16,10 @@ export async function mockLoginMiddleware(
   return res.sendStatus(200);
 }
 
-export async function rawLoginMiddleware(
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) {
-  return mockLoginMiddleware(req, res, next, login);
-}
-
-export const loginMiddleware = routeAsyncCatch(rawLoginMiddleware);
+export const loginMiddleware = routeAsyncCatch(
+  (req: Request, res: Response, next: NextFunction) =>
+    mockLoginMiddleware(req, res, next, login),
+);
 
 export async function mockSignupMiddleware(
   req: Request,
@@ -39,15 +34,10 @@ export async function mockSignupMiddleware(
   return res.sendStatus(200);
 }
 
-export async function rawSignupMiddleware(
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) {
-  return mockSignupMiddleware(req, res, next, signup);
-}
-
-export const signupMiddleware = routeAsyncCatch(rawSignupMiddleware);
+export const signupMiddleware = routeAsyncCatch(
+  (req: Request, res: Response, next: NextFunction) =>
+    mockSignupMiddleware(req, res, next, signup),
+);
 
 export async function mockSessionMiddleware(
   req: Request,
@@ -60,15 +50,10 @@ export async function mockSessionMiddleware(
     return res.sendStatus(401);
   }
 
-  return res.sendStatus(200);
+  return res.status(200).json(sessionResult);
 }
 
-export async function rawSessionMiddleware(
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) {
-  return mockSessionMiddleware(req, res, next, session);
-}
-
-export const sessionMiddleware = routeAsyncCatch(rawSessionMiddleware);
+export const sessionMiddleware = routeAsyncCatch(
+  (req: Request, res: Response, next: NextFunction) =>
+    mockSessionMiddleware(req, res, next, session),
+);

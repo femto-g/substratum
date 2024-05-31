@@ -115,7 +115,7 @@ export async function signup(req: Request) {
 
 export function session(req: Request) {
   if (req.user) {
-    return true;
+    return req.user;
   }
-  return false;
+  return null;
 }
