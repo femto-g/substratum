@@ -1,5 +1,6 @@
 import { Context, createContext } from "../context";
 import {
+  CreateUser,
   User,
   UserRepositoryFunction,
   create,
@@ -14,14 +15,14 @@ export interface UserCrudFunction {
 const context = createContext();
 
 export async function mockCreateUser(
-  param: User,
+  param: CreateUser,
   context: Context,
   repo: UserRepositoryFunction,
 ) {
   return await repo(param, context);
 }
 
-export async function createUser(user: User) {
+export async function createUser(user: CreateUser) {
   return await mockCreateUser(user, context, create);
 }
 
@@ -48,3 +49,12 @@ export async function mockFindUserByName(
 export async function findUserByName(username: string) {
   return await mockFindUserByName(username, context, findByName);
 }
+
+// function crudFactory(context: Context, repo: UserRepositoryFunction) {
+//   return async (index: any) => {
+//     return await repo(index, context);
+//   };
+// }
+
+// const find = crudFactory(context, findByName);
+// const create2 = crudFactory(context, createUser);

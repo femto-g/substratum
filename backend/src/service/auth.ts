@@ -6,10 +6,11 @@ import {
   createUser,
   findUserByName,
 } from "../data/crud/users";
-import { User } from "../data/repositories/userRepository";
+import { CreateUser, User } from "../data/repositories/userRepository";
 import crypto from "crypto";
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { hashPassword } from "../util/helpers";
+import util from "util";
 
 // helpful links
 // http://toon.io/understanding-passportjs-authentication-flow/
@@ -58,40 +59,45 @@ passport.deserializeUser((user: any, done) => {
   done(null, user);
 });
 
-export function login(req: Request) {
-  let result = false;
-  passport.authenticate("local", (err: any, user: Express.User, info: any) => {
-    if (err) {
-      throw err;
-    }
-    if (!user) {
-      result = false;
-    } else {
-      req.login(user, (err: any) => {
-        if (err) {
-          throw err;
-        }
-        //console.log(`logged in as ${user.username}`);
-        result = true;
-      });
-    }
-  })(req);
+//THIS MIGHT BE BROKEN, INVESTIGATE
+// export function login(req: Request) {
+//   const result = { login: false };
+//   passport.authenticate("local", (err: any, user: Express.User, info: any) => {
+//     if (err) {
+//       throw err;
+//     }
+//     if (!user) {
+//       result.login = false;
+//     } else {
+//       req.login(user, (err: any) => {
+//         if (err) {
+//           throw err;
+//         }
+//         //console.log(`logged in as ${user.username}`);
+//         result.login = true;
+//       });
+//     }
+//   })(req);
 
-  return result;
-}
+//   return result;
+// }
 
-export function logout(req: Request) {
-  req.logout((err: any) => {
-    if (err) throw err;
-    return true;
-  });
+export const createLoginMiddleware = (options: passport.AuthenticateOptions) =>
+  passport.authenticate("local", options);
+
+export async function logout(req: Request) {
+  // req.logout((err: any) => {
+  //   if (err) throw err;
+  //   return true;
+  // });
+  await req.logoutAsync?.();
 }
 
 export async function mockSignup(req: Request, create: UserCrudFunction) {
   const salt = crypto.randomBytes(16);
   const username = req.body.username;
   const hashed_password = await hashPassword(req.body.password, salt);
-  const user: User = {
+  const user: CreateUser = {
     username,
     hashed_password,
     salt,
@@ -100,20 +106,24 @@ export async function mockSignup(req: Request, create: UserCrudFunction) {
   if (!result) {
     return false;
   }
-  req.login(user, (err: any) => {
-    if (err) {
-      throw err;
-    }
-    //console.log(`logged in as ${user.username}`);
-    return true;
-  });
+  //req.loginAsync = util.promisify(req.login);
+
+  // req.login(user, (err: any) => {
+  //   if (err) {
+  //     throw err;
+  //   }
+  //   //console.log(`logged in as ${user.username}`);
+  //   return true;
+  // });
+  await req.loginAsync?.({ id: result.id, username: result.username });
+  return true;
 }
 
 export async function signup(req: Request) {
   return mockSignup(req, createUser);
 }
 
-export function session(req: Request) {
+export function passportUser(req: Request) {
   if (req.user) {
     return req.user;
   }

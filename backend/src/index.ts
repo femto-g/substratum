@@ -6,6 +6,7 @@ import { router as authRouter } from "./api/routes/auth";
 import passport from "passport";
 import { sessionMiddleware } from "./api/middleware/session";
 import { corsMiddleware } from "./api/middleware/cors";
+import { passportAsync } from "./api/middleware/auth";
 
 if (process.env.NODE_ENV === "prod") {
   app.set("trust proxy", true);
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use(sessionMiddleware);
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(passportAsync);
 
 app.use("/", authRouter);
 

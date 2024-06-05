@@ -1,8 +1,8 @@
 import passportLocal from "passport-local";
 import passport from "passport";
-import { Request, Response } from "express";
-import { User } from "../../src/data/repositories/userRepository";
-import { mockVerify, mockSignup } from "../../src/service/auth";
+import { Request } from "../../src/util/types/index";
+import { CreateUser, User } from "../../src/data/repositories/userRepository";
+import { mockVerify, mockSignup, signup } from "../../src/service/auth";
 import { mock } from "jest-mock-extended";
 import { cryptoPbkdf2 } from "../../src/util/promisified";
 import crypto from "crypto";
@@ -20,12 +20,14 @@ describe("Auth", () => {
     });
 
     test("When the username exists but the password is incorrect", async () => {
+      const id = 1;
       const username = "testuser";
       const password = "testpassword";
       const salt = crypto.randomBytes(16);
       const actualHashedPassword = await hashPassword("nottestpassword", salt);
 
-      const user: User = {
+      const user = {
+        id,
         username,
         hashed_password: actualHashedPassword,
         salt,
@@ -39,12 +41,14 @@ describe("Auth", () => {
     });
 
     test("When the username exists and the password is correct", async () => {
+      const id = 1;
       const username = "testuser";
       const password = "testpassword";
       const salt = crypto.randomBytes(16);
       const actualHashedPassword = await hashPassword("testpassword", salt);
 
       const user: User = {
+        id,
         username,
         hashed_password: actualHashedPassword,
         salt,
@@ -69,14 +73,17 @@ describe("Auth", () => {
 
       const signupResult = await mockSignup(mockRequest, mockCreate);
 
+      expect(mockRequest.loginAsync).not.toHaveBeenCalled();
       expect(signupResult).toBeFalsy();
     });
 
     test("When using an available username", async () => {
+      const id = 1;
       const username = "testuser";
       const hashed_password = crypto.randomBytes(32);
       const salt = crypto.randomBytes(16);
       const mockUser: User = {
+        id,
         username,
         hashed_password,
         salt,
@@ -89,7 +96,8 @@ describe("Auth", () => {
 
       const signupResult = await mockSignup(mockRequest, mockCreate);
 
-      expect(mockRequest.login).toHaveBeenCalled();
+      expect(mockRequest.loginAsync).toHaveBeenCalled();
+      expect(signupResult).toBeTruthy();
     });
   });
 });

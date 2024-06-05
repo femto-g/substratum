@@ -1,37 +1,85 @@
 import { NextFunction, Request, Response } from "express";
 import { routeAsyncCatch } from "../../util/helpers";
-import { login, signup, logout, session } from "../../service/auth";
-import { Service } from "../../util/types";
+import {
+  signup,
+  createLoginMiddleware,
+  logout,
+  passportUser,
+} from "../../service/auth";
+import { StatusCodes } from "http-status-codes";
+import util from "util";
 
-export async function mockLoginMiddleware(
+// export async function mockLoginMiddleware(
+//   req: Request,
+//   res: Response,
+//   next: NextFunction,
+//   login: Service,
+// ) {
+//   const loginResult = login(req);
+//   if (!loginResult) {
+//     return res.sendStatus(StatusCodes.UNAUTHORIZED);
+//   }
+//   return res.sendStatus(StatusCodes.OK);
+// }
+
+// export const loginMiddleware = routeAsyncCatch(
+//   (req: Request, res: Response, next: NextFunction) =>
+//     mockLoginMiddleware(req, res, next, login),
+// );
+
+// export const loginmw = createLoginMiddleware({
+//   successRedirect: '/loginSuccess',
+//   failureRedirect: '/loginFailure'})
+
+export const loginMiddleware = routeAsyncCatch(
+  createLoginMiddleware({
+    successRedirect: "/loginSuccess",
+    failureRedirect: "/loginFailure",
+  }),
+);
+
+export const loginSuccessMiddleware = routeAsyncCatch(
+  (req: Request, res: Response, next: NextFunction) => {
+    res.sendStatus(StatusCodes.OK);
+  },
+);
+
+export const loginFailureMiddleware = routeAsyncCatch(
+  (req: Request, res: Response, next: NextFunction) => {
+    res.sendStatus(StatusCodes.UNAUTHORIZED);
+  },
+);
+
+export async function mockLogoutMiddleware(
   req: Request,
   res: Response,
   next: NextFunction,
-  login: Service,
+  logout: (req: Request) => Promise<any>,
 ) {
-  const loginResult = login(req);
-  if (!loginResult) {
-    return res.sendStatus(400);
-  }
-  return res.sendStatus(200);
+  // if (req.user) {
+  //   await logout(req);
+  // } else {
+  //   res.sendStatus(StatusCodes.UNAUTHORIZED);
+  // }
+  await logout(req);
 }
 
-export const loginMiddleware = routeAsyncCatch(
+export const logoutMiddleware = routeAsyncCatch(
   (req: Request, res: Response, next: NextFunction) =>
-    mockLoginMiddleware(req, res, next, login),
+    mockLogoutMiddleware(req, res, next, logout),
 );
 
 export async function mockSignupMiddleware(
   req: Request,
   res: Response,
   next: NextFunction,
-  signup: Service,
+  signup: (req: Request) => Promise<any>,
 ) {
-  const signupResult = signup(req);
+  const signupResult = await signup(req);
   if (!signupResult) {
-    return res.sendStatus(400);
+    return res.sendStatus(StatusCodes.UNAUTHORIZED);
   }
-  return res.sendStatus(200);
+  return res.sendStatus(StatusCodes.OK);
 }
 
 export const signupMiddleware = routeAsyncCatch(
@@ -39,21 +87,44 @@ export const signupMiddleware = routeAsyncCatch(
     mockSignupMiddleware(req, res, next, signup),
 );
 
-export async function mockSessionMiddleware(
+export function mockUserMiddleware(
   req: Request,
   res: Response,
   next: NextFunction,
-  session: Service,
+  getCurrentUser: (req: Request) => Express.User | null,
 ) {
-  const sessionResult = session(req);
-  if (!sessionResult) {
-    return res.sendStatus(401);
+  const currentUser = getCurrentUser(req);
+  if (!currentUser) {
+    return res.sendStatus(StatusCodes.UNAUTHORIZED);
   }
 
-  return res.status(200).json(sessionResult);
+  return res.status(StatusCodes.OK).json(currentUser);
 }
 
-export const sessionMiddleware = routeAsyncCatch(
-  (req: Request, res: Response, next: NextFunction) =>
-    mockSessionMiddleware(req, res, next, session),
-);
+export function userMiddleware(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
+  mockUserMiddleware(req, res, next, passportUser);
+}
+
+export function passportAsync(req: Request, res: Response, next: NextFunction) {
+  try {
+    req.loginAsync = util.promisify(req.login);
+    req.logoutAsync = util.promisify(req.logOut);
+  } catch (e) {
+    next();
+  }
+}
+
+export function protectedRoute(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
+  if (req.user) {
+    return next();
+  }
+  return res.sendStatus(StatusCodes.UNAUTHORIZED);
+}

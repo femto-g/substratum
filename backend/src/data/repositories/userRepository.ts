@@ -1,10 +1,11 @@
-import { Prisma } from "@prisma/client";
+import { Prisma, users } from "@prisma/client";
 import { Context } from "../context";
 
-export interface User extends Prisma.usersCreateInput {}
+export interface User extends users {}
+export interface CreateUser extends Prisma.usersCreateInput {}
 
 export interface UserRepository {
-  create: (user: User, context: Context) => any;
+  create: (user: CreateUser, context: Context) => any;
   findById: (id: number, context: Context) => any;
   findByName: (username: string, context: Context) => any;
 }
