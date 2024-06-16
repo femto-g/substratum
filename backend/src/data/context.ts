@@ -6,7 +6,7 @@ export type Context = {
 
 const client = new PrismaClient();
 
-export const createContext = (): Context => {
+export const getContext = (): Context => {
   return {
     client,
   };

@@ -2,11 +2,11 @@ import passportLocal from "passport-local";
 import passport from "passport";
 import { cryptoPbkdf2 } from "../util/promisified";
 import {
-  UserCrudFunction,
+  UserCreate,
+  UserRepositoryFunction,
   createUser,
   findUserByName,
-} from "../data/crud/users";
-import { CreateUser, User } from "../data/repositories/userRepository";
+} from "../data/repositories/userRepository";
 import crypto from "crypto";
 import { NextFunction, Request, Response } from "express";
 import { hashPassword } from "../util/helpers";
@@ -23,7 +23,7 @@ export async function mockVerify(
   username: string,
   password: string,
   done: any,
-  find: UserCrudFunction,
+  find: UserRepositoryFunction,
 ) {
   try {
     const result = await find(username);
@@ -93,11 +93,11 @@ export async function logout(req: Request) {
   await req.logoutAsync?.();
 }
 
-export async function mockSignup(req: Request, create: UserCrudFunction) {
+export async function mockSignup(req: Request, create: UserRepositoryFunction) {
   const salt = crypto.randomBytes(16);
   const username = req.body.username;
   const hashed_password = await hashPassword(req.body.password, salt);
-  const user: CreateUser = {
+  const user: UserCreate = {
     username,
     hashed_password,
     salt,

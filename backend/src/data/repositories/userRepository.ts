@@ -1,21 +1,17 @@
 import { Prisma, users } from "@prisma/client";
-import { Context } from "../context";
+import { Context, getContext } from "../context";
 
 export interface User extends users {}
-export interface CreateUser extends Prisma.usersCreateInput {}
-
-export interface UserRepository {
-  create: (user: CreateUser, context: Context) => any;
-  findById: (id: number, context: Context) => any;
-  findByName: (username: string, context: Context) => any;
-}
+export interface UserCreate extends Prisma.usersCreateInput {}
 
 export interface UserRepositoryFunction {
-  (index: any, context: Context): Promise<User | null>;
+  (index: any): Promise<User | null>;
 }
 
-export async function create(
-  user: User,
+const context = getContext();
+
+export async function mockCreateUser(
+  user: UserCreate,
   context: Context,
 ): Promise<User | null> {
   let result = null;
@@ -37,7 +33,11 @@ export async function create(
   return result;
 }
 
-export async function findById(
+export async function createUser(user: UserCreate) {
+  return await mockCreateUser(user, context);
+}
+
+export async function mockFindUserById(
   id: number,
   context: Context,
 ): Promise<User | null> {
@@ -58,7 +58,11 @@ export async function findById(
   return result;
 }
 
-export async function findByName(
+export async function findUserById(id: number) {
+  return await mockFindUserById(id, context);
+}
+
+export async function mockFindUserByName(
   username: string,
   context: Context,
 ): Promise<User | null> {
@@ -77,4 +81,8 @@ export async function findByName(
   }
 
   return result;
+}
+
+export async function findUserByName(username: string) {
+  return await mockFindUserByName(username, context);
 }
