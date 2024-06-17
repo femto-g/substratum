@@ -1,6 +1,6 @@
 import path from "path";
 import dotenv from "dotenv";
-import { httpServer } from ".";
+import { app } from ".";
 
 const envPath: string = path.resolve(
   __dirname,
@@ -8,8 +8,8 @@ const envPath: string = path.resolve(
 );
 dotenv.config({ path: envPath });
 
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 
-httpServer.listen(port, () => {
+app.listen(port, () => {
   console.log(`Example app listening on port ${port}!`);
 });

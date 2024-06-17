@@ -31,12 +31,19 @@ import util from "util";
 //   successRedirect: '/loginSuccess',
 //   failureRedirect: '/loginFailure'})
 
-export const loginMiddleware = routeAsyncCatch(
-  createLoginMiddleware({
-    successRedirect: "/loginSuccess",
-    failureRedirect: "/loginFailure",
-  }),
+export const checkUser = routeAsyncCatch(
+  (req: Request, res: Response, next: NextFunction) => {
+    if (req.user) {
+      return res.sendStatus(200);
+    }
+    return res.sendStatus(401);
+  },
 );
+
+export const loginMiddleware = [
+  routeAsyncCatch(createLoginMiddleware()),
+  checkUser,
+];
 
 export const loginSuccessMiddleware = routeAsyncCatch(
   (req: Request, res: Response, next: NextFunction) => {
@@ -114,7 +121,8 @@ export function passportAsync(req: Request, res: Response, next: NextFunction) {
     req.loginAsync = util.promisify(req.login);
     req.logoutAsync = util.promisify(req.logOut);
   } catch (e) {
-    next();
+  } finally {
+    return next();
   }
 }
 

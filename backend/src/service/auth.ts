@@ -82,8 +82,7 @@ passport.deserializeUser((user: any, done) => {
 //   return result;
 // }
 
-export const createLoginMiddleware = (options: passport.AuthenticateOptions) =>
-  passport.authenticate("local", options);
+export const createLoginMiddleware = () => passport.authenticate("local");
 
 export async function logout(req: Request) {
   // req.logout((err: any) => {

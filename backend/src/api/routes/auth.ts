@@ -14,8 +14,8 @@ import { userSchema } from "../../util/types/schemas";
 export const router = Router();
 
 router.post("/login", validateRequestBody(userSchema), loginMiddleware);
-router.get("/loginSuccess", loginSuccessMiddleware);
-router.get("/loginFailure", loginFailureMiddleware);
+// router.get("/loginSuccess", loginSuccessMiddleware);
+// router.get("/loginFailure", loginFailureMiddleware);
 router.post("/signup", validateRequestBody(userSchema), signupMiddleware);
 router.get("/user", userMiddleware);
 router.get("/logout", protectedRoute, logoutMiddleware);

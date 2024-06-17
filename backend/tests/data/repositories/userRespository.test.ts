@@ -6,8 +6,9 @@ import {
   findUserById,
   findUserByName,
 } from "../../../src/data/repositories/userRepository";
-describe("(Database): User respository", () => {
-  const client = new PrismaClient();
+import { getContext } from "../../../src/data/context";
+describe("Database: User respository", () => {
+  const client = getContext().client;
 
   beforeAll(async () => {
     const username = "user1";
@@ -24,6 +25,7 @@ describe("(Database): User respository", () => {
 
   afterAll(async () => {
     await client.users.deleteMany();
+    await client.$disconnect();
   });
 
   describe("create", () => {
