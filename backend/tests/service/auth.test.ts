@@ -1,6 +1,6 @@
 import passportLocal from "passport-local";
 import passport from "passport";
-import { Request } from "../../src/util/types/index";
+import { Request } from "../../src/types/index";
 import { User } from "../../src/data/repositories/userRepository";
 import { mockVerify, mockSignup, signup } from "../../src/service/auth";
 import { mock } from "jest-mock-extended";
