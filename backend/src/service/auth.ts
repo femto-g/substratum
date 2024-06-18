@@ -1,6 +1,5 @@
 import passportLocal from "passport-local";
 import passport from "passport";
-import { cryptoPbkdf2 } from "../util/promisified";
 import {
   UserCreate,
   UserRepositoryFunction,
@@ -8,9 +7,8 @@ import {
   findUserByName,
 } from "../data/repositories/userRepository";
 import crypto from "crypto";
-import { NextFunction, Request, Response } from "express";
+import { Request } from "express";
 import { hashPassword } from "../util/helpers";
-import util from "util";
 
 // helpful links
 // http://toon.io/understanding-passportjs-authentication-flow/
@@ -59,36 +57,9 @@ passport.deserializeUser((user: any, done) => {
   done(null, user);
 });
 
-//THIS MIGHT BE BROKEN, INVESTIGATE
-// export function login(req: Request) {
-//   const result = { login: false };
-//   passport.authenticate("local", (err: any, user: Express.User, info: any) => {
-//     if (err) {
-//       throw err;
-//     }
-//     if (!user) {
-//       result.login = false;
-//     } else {
-//       req.login(user, (err: any) => {
-//         if (err) {
-//           throw err;
-//         }
-//         //console.log(`logged in as ${user.username}`);
-//         result.login = true;
-//       });
-//     }
-//   })(req);
-
-//   return result;
-// }
-
 export const createLoginMiddleware = () => passport.authenticate("local");
 
 export async function logout(req: Request) {
-  // req.logout((err: any) => {
-  //   if (err) throw err;
-  //   return true;
-  // });
   await req.logoutAsync?.();
 }
 
@@ -105,15 +76,6 @@ export async function mockSignup(req: Request, create: UserRepositoryFunction) {
   if (!result) {
     return false;
   }
-  //req.loginAsync = util.promisify(req.login);
-
-  // req.login(user, (err: any) => {
-  //   if (err) {
-  //     throw err;
-  //   }
-  //   //console.log(`logged in as ${user.username}`);
-  //   return true;
-  // });
   await req.loginAsync?.({ id: result.id, username: result.username });
   return true;
 }

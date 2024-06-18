@@ -9,34 +9,12 @@ import {
 import { StatusCodes } from "http-status-codes";
 import util from "util";
 
-// export async function mockLoginMiddleware(
-//   req: Request,
-//   res: Response,
-//   next: NextFunction,
-//   login: Service,
-// ) {
-//   const loginResult = login(req);
-//   if (!loginResult) {
-//     return res.sendStatus(StatusCodes.UNAUTHORIZED);
-//   }
-//   return res.sendStatus(StatusCodes.OK);
-// }
-
-// export const loginMiddleware = routeAsyncCatch(
-//   (req: Request, res: Response, next: NextFunction) =>
-//     mockLoginMiddleware(req, res, next, login),
-// );
-
-// export const loginmw = createLoginMiddleware({
-//   successRedirect: '/loginSuccess',
-//   failureRedirect: '/loginFailure'})
-
 export const checkUser = routeAsyncCatch(
   (req: Request, res: Response, next: NextFunction) => {
     if (req.user) {
-      return res.sendStatus(200);
+      return res.sendStatus(StatusCodes.OK);
     }
-    return res.sendStatus(401);
+    return res.sendStatus(StatusCodes.UNAUTHORIZED);
   },
 );
 
@@ -63,11 +41,6 @@ export async function mockLogoutMiddleware(
   next: NextFunction,
   logout: (req: Request) => Promise<any>,
 ) {
-  // if (req.user) {
-  //   await logout(req);
-  // } else {
-  //   res.sendStatus(StatusCodes.UNAUTHORIZED);
-  // }
   await logout(req);
 }
 

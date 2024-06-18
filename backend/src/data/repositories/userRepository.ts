@@ -18,13 +18,9 @@ export async function mockCreateUser(
   try {
     result = await context.client.users.create({ data: user });
   } catch (e) {
-    console.error(e);
     if (e instanceof Prisma.PrismaClientKnownRequestError) {
-      // The .code property can be accessed in a type-safe manner
       if (e.code === "P2002") {
-        // console.log(
-        //   'There is a unique constraint violation, a new user cannot be created with this email'
-        // )
+        //unique constraint violation
         return null;
       }
     }
