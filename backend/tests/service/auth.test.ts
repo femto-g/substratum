@@ -1,10 +1,7 @@
-import passportLocal from "passport-local";
-import passport from "passport";
 import { Request } from "../../src/types/index";
 import { User } from "../../src/data/repositories/userRepository";
-import { mockVerify, mockSignup, signup } from "../../src/service/auth";
+import { mockVerify, mockSignup } from "../../src/service/auth";
 import { mock } from "jest-mock-extended";
-import { cryptoPbkdf2 } from "../../src/util/promisified";
 import crypto from "crypto";
 import { hashPassword } from "../../src/util/helpers";
 

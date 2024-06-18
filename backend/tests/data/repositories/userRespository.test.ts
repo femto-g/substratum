@@ -1,9 +1,7 @@
-import { PrismaClient } from "@prisma/client";
 import { hashPassword } from "../../../src/util/helpers";
 import crypto from "crypto";
 import {
   createUser,
-  findUserById,
   findUserByName,
 } from "../../../src/data/repositories/userRepository";
 import { getContext } from "../../../src/data/context";
@@ -70,23 +68,5 @@ describe("Database: User respository", () => {
         expect(result).toBeFalsy;
       });
     });
-
-    // describe("find by id", async () => {
-    //   const existingUser = await client.users.findFirst();
-    //   const existingId = existingUser!.id;
-    //   const nonExistingId = 1984375923;
-    //   client.users.delete({ where: { id: nonExistingId } });
-
-    //   test("when a user with the id exists in the db", async () => {
-    //     const result = await findUserById(existingId);
-    //     expect(result).toBeTruthy();
-    //   });
-
-    //   test("when a user with the id exists in the db", async () => {
-    //     const id = 1984375923;
-    //     const result = await findUserById(nonExistingId);
-    //     expect(result).toBeFalsy();
-    //   });
-    //});
   });
 });

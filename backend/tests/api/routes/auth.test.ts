@@ -1,4 +1,3 @@
-import { Server } from "http";
 import { app } from "../../../src/index";
 import request from "supertest";
 import { getContext } from "../../../src/data/context";
