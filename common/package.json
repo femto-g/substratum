@@ -1,10 +1,12 @@
 {
-  "name": "common",
+  "name": "@packages/common",
   "version": "1.0.0",
   "description": "shared resources",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "src/index.d.ts",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "build": "tsc"
   },
   "author": "",
   "license": "ISC",

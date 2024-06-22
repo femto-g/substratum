@@ -7,7 +7,7 @@ import {
   userMiddleware,
 } from "../middleware/auth";
 import { validateRequestBody } from "../middleware/validation";
-import { userSchema } from "../../types/schemas";
+import { userSchema } from "@packages/common";
 
 export const router = Router();
 
