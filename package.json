@@ -10,8 +10,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev-backend": "npm run dev --workspace=backend",
-    "dev-frontend": "npm run dev --workspace=frontend"
+    "dev:backend": "npm run dev --workspace=backend",
+    "dev:rontend": "npm run dev --workspace=frontend",
+    "build:backend": "npm run build --workspace=backend",
+    "build:common": "npm run build --workspace=common"
   },
   "author": "",
   "license": "ISC"
