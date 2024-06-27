@@ -29,25 +29,27 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/github_username/repo_name">
+  <a href="https://github.com/femto-g/substratum">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">project_title</h3>
+<h3 align="center">Substratum</h3>
 
   <p align="center">
     Full stack boilerplate
     <br />
-    <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/femto-g/substratum"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/github_username/repo_name">View Demo</a>
+    <a href="https://github.com/femto-g/substratum">View Demo</a>
     ·
-    <a href="https://github.com/github_username/repo_name/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
+    <a href="https://github.com/femto-g/substratum/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
     ·
-    <a href="https://github.com/github_username/repo_name/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
+    <a href="https://github.com/femto-g/substratum/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
   </p>
 </div>
+
+[![TypeScript][TypeScript]][TypeScript-url] [![Next][Next.js]][Next-url] [![React][React.js]][React-url] [![ExpressJS][ExpressJS]][ExpressJS-url] [![Prisma][Prisma]][Prisma-url]
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -77,60 +79,77 @@
 
 <!-- ABOUT THE PROJECT -->
 
-## About The Project
+## Overview and Motivation
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
+<!-- Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `femto-g`, `substratum`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `Substratum`, `project_description` -->
+
+Starting a new project can sometimes come with a feeling of paralysis, especially when faced with the tedium of having to set up boilerplate for the nth time.
+
+I found myself facing this issue, augmented by the fact that between each new project, I was learning more about software development best practices and patterns and of course new technologies, which made it hard to reuse code from previous projects.
+
+This repository serves as a starting point for a full stack project, with good patterns and architecture and many useful features already set up.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### Built With
+<!-- ### Built With
 
-- [![Next][Next.js]][Next-url]
-- [![React][React.js]][React-url]
-- [![Vue][Vue.js]][Vue-url]
-- [![Angular][Angular.io]][Angular-url]
-- [![Svelte][Svelte.dev]][Svelte-url]
-- [![Laravel][Laravel.com]][Laravel-url]
-- [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-- [![JQuery][JQuery.com]][JQuery-url]
+[![Next][Next.js]][Next-url] [![React][React.js]][React-url] [![Prisma][Prisma]][Prisma-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- GETTING STARTED -->
+GETTING STARTED -->
 
-## Getting Started
+## Quick Start
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+The fastest way to get started with Substratum is using docker.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
+<!-- This is an example of how to list things you need to use the software and how to install them.
 
 - npm
   ```sh
   npm install npm@latest -g
-  ```
+  ``` -->
+
+Docker
+Node.js
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repo
    ```sh
-   git clone https://github.com/github_username/repo_name.git
+   git clone https://github.com/femto-g/substratum.git
    ```
-3. Install NPM packages
+2. Install NPM packages
    ```sh
    npm install
    ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = "ENTER YOUR API";
+3. Add the .env files
+
+4. Using docker compose, build and run the frontend, backend, and db containers
+   ```sh
+   docker compose up --watch
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- USAGE EXAMPLES -->
+
+## Features
+
+- Docker support
+- Authentication with PassportJS
+- Schema Validation with Zod
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- USAGE EXAMPLES -->
+
+## Project Structure and Architecture
+
+This project is a monorepo that leverages npm workspaces to share code between packages. The two main packages are 'backend' and 'frontend' which both import code from the 'common' package. This is useful; for example, for using the same schema and type definitions for both API request validation, and form validation without needing to duplicate code.
 
 <!-- USAGE EXAMPLES -->
 
@@ -151,7 +170,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 - [ ] Feature 3
   - [ ] Nested Feature
 
-See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/femto-g/substratum/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -186,16 +205,16 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
 
-Project Link: [https://github.com/github_username/repo_name](https://github.com/github_username/repo_name)
+Project Link: [https://github.com/femto-g/substratum](https://github.com/femto-g/substratum)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ACKNOWLEDGMENTS -->
 
-## Acknowledgments
+## Inspiration
 
-- []()
-- []()
+- [prisma-express-typescript-boilerplate](https://github.com/antonio-lazaro/prisma-express-typescript-boilerplate?tab=readme-ov-file)
+- [precedent](https://github.com/steven-tey/precedent/tree/main)
 - []()
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -203,16 +222,16 @@ Project Link: [https://github.com/github_username/repo_name](https://github.com/
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/github_username/repo_name.svg?style=for-the-badge
-[contributors-url]: https://github.com/github_username/repo_name/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/github_username/repo_name.svg?style=for-the-badge
-[forks-url]: https://github.com/github_username/repo_name/network/members
-[stars-shield]: https://img.shields.io/github/stars/github_username/repo_name.svg?style=for-the-badge
-[stars-url]: https://github.com/github_username/repo_name/stargazers
-[issues-shield]: https://img.shields.io/github/issues/github_username/repo_name.svg?style=for-the-badge
-[issues-url]: https://github.com/github_username/repo_name/issues
-[license-shield]: https://img.shields.io/github/license/github_username/repo_name.svg?style=for-the-badge
-[license-url]: https://github.com/github_username/repo_name/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/femto-g/substratum.svg?style=for-the-badge
+[contributors-url]: https://github.com/femto-g/substratum/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/femto-g/substratum.svg?style=for-the-badge
+[forks-url]: https://github.com/femto-g/substratum/network/members
+[stars-shield]: https://img.shields.io/github/stars/femto-g/substratum.svg?style=for-the-badge
+[stars-url]: https://github.com/femto-g/substratum/stargazers
+[issues-shield]: https://img.shields.io/github/issues/femto-g/substratum.svg?style=for-the-badge
+[issues-url]: https://github.com/femto-g/substratum/issues
+[license-shield]: https://img.shields.io/github/license/femto-g/substratum.svg?style=for-the-badge
+[license-url]: https://github.com/femto-g/substratum/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/linkedin_username
 [product-screenshot]: images/screenshot.png
@@ -232,3 +251,9 @@ Project Link: [https://github.com/github_username/repo_name](https://github.com/
 [Bootstrap-url]: https://getbootstrap.com
 [JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
 [JQuery-url]: https://jquery.com
+[Prisma]: https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white
+[Prisma-url]: https://www.prisma.io/
+[TypeScript]: https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white
+[Typescript-url]: https://www.typescriptlang.org/
+[ExpressJS]: https://img.shields.io/badge/Express%20js-000000?style=for-the-badge&logo=express&logoColor=white
+[ExpressJS-url]: https://expressjs.com/
