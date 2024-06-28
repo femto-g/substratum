@@ -24,13 +24,14 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
+
+<!-- [![LinkedIn][linkedin-shield]][linkedin-url] -->
 
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
   <a href="https://github.com/femto-g/substratum">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="frontend/public/substratum.svg" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">Substratum</h3>
@@ -114,8 +115,8 @@ The fastest way to get started with Substratum is using docker.
   npm install npm@latest -g
   ``` -->
 
-Docker
-Node.js
+- Docker
+- Node.js
 
 ### Installation
 
@@ -133,6 +134,7 @@ Node.js
    ```sh
    docker compose up --watch
    ```
+   That's it! You're ready to start developing.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

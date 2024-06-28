@@ -3,5 +3,5 @@ export default function CardHeader({
 }: {
   children: React.ReactNode;
 }) {
-  return <h2>{children}</h2>;
+  return <h2 className="font-medium">{children}</h2>;
 }

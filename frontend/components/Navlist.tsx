@@ -5,12 +5,12 @@ export default function Navlist() {
   return (
     <span className="flex flex-row justify-between">
       <span className="flex gap-6">
-        <a className="">About</a>
-        <a className="">Docs </a>
+        <Link href={"/about"}>About</Link>
+        <Link href={"/docs"}>Docs</Link>
       </span>
       <span className="flex gap-6">
-        <a>Sign up</a>
-        <a>Sign in</a>
+        <Link href={"/signup"}>Sign Up</Link>
+        <Link href={"/login"}>Log In</Link>
       </span>
     </span>
   );
