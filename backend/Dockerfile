@@ -33,7 +33,7 @@ RUN npx prisma generate
 RUN npm run build
 
 WORKDIR /root/backend
-CMD ["sh", "scripts/backend.sh"]
+CMD ["sh", "scripts/start.sh"]
 
 # FROM node:20-alpine as development
 # WORKDIR /backend

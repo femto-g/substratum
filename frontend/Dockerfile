@@ -17,51 +17,17 @@
 # If reproducability is important, consider using a versioned tag
 # (e.g., alpine:3.17.2) or SHA (e.g., alpine@sha256:c41ab5c992deb4fe7e5da09f67a8804a46bd0592bfdf0b1847dde0e0889d2bff).
 FROM node:20-alpine as build
+EXPOSE 3000
 WORKDIR /root
-# COPY /common /backend ./
-# COPY package.json package.json
-# COPY /backend /common package.json ./
 COPY /common ./common
 COPY /frontend ./frontend
 COPY package.json ./package.json
-# COPY package-lock.json ./package-lock.json
-
 RUN npm install
-# RUN ls
-# RUN npm install
-# COPY . .
-# WORKDIR /root/backend
-# RUN ls
-# WORKDIR /root/common
-# RUN ls
-# FROM build
+
 WORKDIR /root/common
-# RUN npm install
 RUN npm run build
 
-# WORKDIR /root
-# RUN npm install
-
-# COPY .. ..S
-# RUN npm install
-# RUN ls
-# RUN cd ./common && npm run build
-# RUN cd ../backend && npm run build
-# WORKDIR /root
-# RUN ls
-
-# FROM build
 WORKDIR /root/frontend
-# RUN ls
-# RUN npm install
-# RUN npx prisma migrate dev --name init
-# RUN npx prisma generate
-# RUN npm run build
-
-
-# FROM build as development
-WORKDIR /root/frontend
-# WORKDIR /root
 CMD ["sh", "scripts/start.sh"]
 # ENTRYPOINT [ "npm", "run",  "dev" ]
 # CMD ["sh", "scripts/backend.sh"]

@@ -37,16 +37,16 @@
 <h3 align="center">Substratum</h3>
 
   <p align="center">
-    Full stack boilerplate
+    A starter-kit for full stack projects
     <br />
-    <a href="https://github.com/femto-g/substratum"><strong>Explore the docs »</strong></a>
+    <!-- <a href="https://github.com/femto-g/substratum"><strong>Explore the docs »</strong></a> -->
     <br />
     <br />
-    <a href="https://github.com/femto-g/substratum">View Demo</a>
+    <!-- <a href="https://github.com/femto-g/substratum">View Demo</a>
     ·
     <a href="https://github.com/femto-g/substratum/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
     ·
-    <a href="https://github.com/femto-g/substratum/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
+    <a href="https://github.com/femto-g/substratum/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a> -->
   </p>
 </div>
 
@@ -57,13 +57,13 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
+      <a href="#overview-and-motivation">Overview and Motivation</a>
+      <!-- <ul>
         <li><a href="#built-with">Built With</a></li>
-      </ul>
+      </ul> -->
     </li>
     <li>
-      <a href="#getting-started">Getting Started</a>
+      <a href="#quick-start">Quick Start</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
@@ -82,7 +82,7 @@
 
 ## Overview and Motivation
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+<!-- [![Product Name Screen Shot][product-screenshot]](https://example.com) -->
 
 <!-- Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `femto-g`, `substratum`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `Substratum`, `project_description` -->
 
@@ -104,7 +104,7 @@ GETTING STARTED -->
 
 ## Quick Start
 
-The fastest way to get started with Substratum is using docker.
+The fastest way to get started with Substratum is using Docker.
 
 ### Prerequisites
 
@@ -116,7 +116,7 @@ The fastest way to get started with Substratum is using docker.
   ``` -->
 
 - Docker
-- Node.js
+- Node.js and NPM
 
 ### Installation
 
@@ -129,11 +129,13 @@ The fastest way to get started with Substratum is using docker.
    npm install
    ```
 3. Set up local secrets
-   create /secrets/db-password.txt
+
+   1. Create the file /backend/.env.development. For simplicity, you can simply rename the .env.example that is included in this repo. Update the \$\{PASSWORD\} in DATABASE_URL; update the other variables as necessary.
+   2. Create /secrets/db-password.txt. This file should contain the value you used for $\{PASSWORD\} in the previous step.
 
 4. Using docker compose, build and run the frontend, backend, and db containers
    ```sh
-   docker compose up --watch
+   npm run docker:dev:up
    ```
    That's it! You're ready to start developing.
 
