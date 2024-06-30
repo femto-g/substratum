@@ -32,5 +32,5 @@ jobs:
         working-directory: ./backend
       - run: npm run build --if-present
         working-directory: ./common
-      - run: npm run test-local
+      - run: npm run test:local
         working-directory: ./backend
