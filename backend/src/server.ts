@@ -1,12 +1,5 @@
-import path from "path";
-import dotenv from "dotenv";
+import "./util/env";
 import { app } from ".";
-
-const envPath: string = path.resolve(
-  __dirname,
-  `../env/${process.env.NODE_ENV}.env`,
-);
-dotenv.config({ path: envPath });
 
 const port = process.env.PORT || 3001;
 

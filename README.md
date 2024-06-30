@@ -128,7 +128,8 @@ The fastest way to get started with Substratum is using docker.
    ```sh
    npm install
    ```
-3. Add the .env files
+3. Set up local secrets
+   create /secrets/db-password.txt
 
 4. Using docker compose, build and run the frontend, backend, and db containers
    ```sh

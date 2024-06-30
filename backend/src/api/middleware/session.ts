@@ -12,9 +12,9 @@ const sessionOptions: SessionOptions = {
   secret: process.env.EXPRESS_SESSION_SECRET || "keyboard cat",
   cookie: {
     maxAge: 1000 * 60 * 30,
-    secure: process.env.NODE_ENV === "prod" ? true : false,
+    secure: process.env.NODE_ENV === "production" ? true : false,
     sameSite:
-      process.env.NODE_ENV === "prod"
+      process.env.NODE_ENV === "production"
         ? "none"
         : ("lax" as boolean | "none" | "lax" | "strict" | undefined),
   },

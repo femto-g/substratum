@@ -7,7 +7,7 @@ import { passportAsync } from "./api/middleware/auth";
 
 export const app = express();
 
-if (process.env.NODE_ENV === "prod") {
+if (process.env.NODE_ENV === "production") {
   app.set("trust proxy", true);
 }
 

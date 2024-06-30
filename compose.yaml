@@ -39,7 +39,7 @@ services:
       db:
         condition: service_healthy
     env_file:
-      - ./backend/compose.env
+      - ./backend/.env.development
     develop:
       watch:
         - action: sync
@@ -58,7 +58,7 @@ services:
     # volumes:
     #   - db-data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_DB=containerdb
+      - POSTGRES_DB=postgres
       - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
     expose:
       - 5432
