@@ -146,8 +146,13 @@ The fastest way to get started with Substratum is using Docker.
 ## Features
 
 - Docker support
-- Authentication with PassportJS
+- Authentication with Passport
 - Schema Validation with Zod
+- Prisma ORM
+- Github Actions CI
+- Unit and Integration Tests with Jest
+- Linting with ESLint
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- USAGE EXAMPLES -->
@@ -156,6 +161,7 @@ The fastest way to get started with Substratum is using Docker.
 
 This project is a monorepo that leverages npm workspaces to share code between packages. The two main packages are 'backend' and 'frontend' which both import code from the 'common' package. This is useful; for example, for using the same schema and type definitions for both API request validation, and form validation without needing to duplicate code.
 
+<!--
 <!-- USAGE EXAMPLES -->
 
 ## Usage
@@ -164,11 +170,11 @@ Use this space to show useful examples of how a project can be used. Additional 
 
 _For more examples, please refer to the [Documentation](https://example.com)_
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">back to top</a>)</p> -->
 
 <!-- ROADMAP -->
 
-## Roadmap
+<!-- ## Roadmap
 
 - [ ] Feature 1
 - [ ] Feature 2
@@ -177,7 +183,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 See the [open issues](https://github.com/femto-g/substratum/issues) for a full list of proposed features (and known issues).
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">back to top</a>)</p> -->
 
 <!-- CONTRIBUTING -->
 
