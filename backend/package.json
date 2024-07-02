@@ -18,6 +18,9 @@
   },
   "author": "",
   "license": "ISC",
+  "lint-staged": {
+    "*.ts": "eslint -c eslint.config.mjs"
+  },
   "devDependencies": {
     "@eslint/js": "^9.6.0",
     "@types/body-parser": "^1.19.5",

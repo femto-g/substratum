@@ -19,8 +19,13 @@
     "docker:test:backend": "docker compose run backend npm test --rm",
     "docker:dev:up": "docker compose up --watch",
     "docker:dev:down": "docker compose down",
-    "docker:rebuild": "docker compose build --no-cache"
+    "docker:rebuild": "docker compose build --no-cache",
+    "prepare": "husky"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.7"
+  }
 }
