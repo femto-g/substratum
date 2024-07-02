@@ -10,4 +10,10 @@ export default [
   ...tseslint.configs.recommended,
   eslintConfigPrettier,
   { ignores: ["**/**", "!src/**"] },
+  {
+    rules: {
+      "@typescript-eslint/no-unused-vars": "off",
+      "@typescript-eslint/no-explicit-any": "off",
+    },
+  },
 ];

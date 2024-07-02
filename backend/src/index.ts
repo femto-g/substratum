@@ -1,4 +1,4 @@
-import express, { Express, Request, Response } from "express";
+import express, { Request, Response } from "express";
 import { router as authRouter } from "./api/routes/auth";
 import passport from "passport";
 import { sessionMiddleware } from "./api/middleware/session";

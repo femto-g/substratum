@@ -1,12 +1,12 @@
 import { Request, Response, NextFunction } from "express";
-import { z, ZodError, ZodIssue, ZodObject } from "zod";
+import { ZodError, ZodIssue, ZodObject } from "zod";
 import { StatusCodes } from "http-status-codes";
 
 export function formatIssuePath(path: (string | number)[]) {
   const first = path[0];
   let formattedPath = first.toString();
   const restOfPath = path.slice(1);
-  for (let key of restOfPath) {
+  for (const key of restOfPath) {
     if ((key as string).length) {
       formattedPath += "." + key;
     } else {

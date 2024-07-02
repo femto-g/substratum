@@ -93,9 +93,8 @@ export function passportAsync(req: Request, res: Response, next: NextFunction) {
   try {
     req.loginAsync = util.promisify(req.login);
     req.logoutAsync = util.promisify(req.logOut);
-  } catch (e) {
   } finally {
-    return next();
+    next();
   }
 }
 
