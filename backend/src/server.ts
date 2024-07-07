@@ -1,4 +1,4 @@
-import "./util/env";
+import "./core/env";
 import { app } from ".";
 
 const port = process.env.PORT || 3001;

@@ -24,7 +24,7 @@ export function validateRequestBody(schema: ZodObject<any, any>) {
     } catch (error) {
       if (error instanceof ZodError) {
         const errorMessages = error.errors.map((issue: ZodIssue) => ({
-          message: `${issue.message} at ${formatIssuePath(issue.path)}`,
+          message: `${formatIssuePath(issue.path)} : ${issue.message}`,
         }));
         res
           .status(StatusCodes.BAD_REQUEST)
