@@ -1,8 +1,8 @@
 import { Prisma, users } from "@prisma/client";
 import { Context, getContext } from "../context";
 
-export interface User extends users {}
-export interface UserCreate extends Prisma.usersCreateInput {}
+export type User = users;
+export type UserCreate = Prisma.usersCreateInput;
 
 export interface UserRepositoryFunction {
   (index: any): Promise<User | null>;

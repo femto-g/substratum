@@ -1,0 +1,3 @@
+# Prevents the default behavior of converting to native line endings
+# Since bash scripts run in a linux container they should always use lf 
+*.sh text eol=lf

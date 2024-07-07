@@ -104,7 +104,7 @@ GETTING STARTED -->
 
 ## Quick Start
 
-The fastest way to get started with Substratum is using Docker.
+The easiest way to get started with Substratum is using Docker.
 
 ### Prerequisites
 
@@ -115,8 +115,8 @@ The fastest way to get started with Substratum is using Docker.
   npm install npm@latest -g
   ``` -->
 
-- Docker
-- Node.js and NPM
+- [Docker](https://www.docker.com/)
+- [Node.js and NPM](https://nodejs.org/en)
 
 ### Installation
 
@@ -146,12 +146,15 @@ The fastest way to get started with Substratum is using Docker.
 ## Features
 
 - Docker support
-- Authentication with Passport
-- Schema Validation with Zod
-- Prisma ORM
-- Github Actions CI
-- Unit and Integration Tests with Jest
-- Linting with ESLint
+- Authentication with [Passport](https://www.passportjs.org/)
+- Schema Validation with [Zod](https://zod.dev/)
+- [Prisma](https://www.prisma.io/) ORM
+- [Github Actions](https://docs.github.com/en/actions) CI
+- Unit and Integration Tests with [Jest](https://jestjs.io/)
+- Linting with [ESLint](https://eslint.org/)
+- Pre-commit Githooks with [Husky]() and [lint-staged]()
+- Logging with [Morgan](https://www.npmjs.com/package/morgan) and [Winston](https://github.com/winstonjs/winston)
+- Code Security Analysis with CodeQL
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -161,16 +164,18 @@ The fastest way to get started with Substratum is using Docker.
 
 This project is a monorepo that leverages npm workspaces to share code between packages. The two main packages are 'backend' and 'frontend' which both import code from the 'common' package. This is useful; for example, for using the same schema and type definitions for both API request validation, and form validation without needing to duplicate code.
 
-<!--
 <!-- USAGE EXAMPLES -->
-<!--
+
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+```sh
+   docker:dev:up # Start service containers with docker compose. Sets up hot reload from the host
+   docker:dev:down # Stop the containers
+   docker:rebuild # Re-build the service containers without caching
+   docker:dev:backend:test # Run all backend tests in a container
+```
 
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p> --> -->
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ROADMAP -->
 
