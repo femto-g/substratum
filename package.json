@@ -14,7 +14,7 @@
     "dev:frontend": "npm run dev --workspace=frontend",
     "build:backend": "npm run build --workspace=backend",
     "build:common": "npm run build --workspace=common",
-    "docker:test:local:backend": "docker compose run backend npm run test:local --no-deps --rm",
+    "docker:test:unit:backend": "docker compose run backend npm run test:unit --no-deps --rm",
     "docker:test:db:backend": "docker compose run backend npm run test:db --rm",
     "docker:test:backend": "docker compose run backend npm test --rm",
     "docker:dev:up": "docker compose up --watch",

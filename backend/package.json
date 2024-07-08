@@ -6,7 +6,7 @@
   "scripts": {
     "test": "dotenv -e .env.test -- jest",
     "test:db": "dotenv -e .env.test -- jest --testPathPattern=/routes/ --testPathPattern=/data/",
-    "test:local": "jest --testPathIgnorePatterns=/routes/ --testPathIgnorePatterns=/data/",
+    "test:unit": "jest --testPathIgnorePatterns=/routes/ --testPathIgnorePatterns=/data/",
     "lint": "eslint",
     "dev": "tsc-watch -p tsconfig.base.json --onSuccess \"cross-env NODE_ENV=development node ./dist/server.js\"",
     "db-migrate": "prisma migrate dev",
