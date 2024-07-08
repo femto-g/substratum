@@ -76,7 +76,7 @@ jobs:
       - run: npm run build --if-present
         working-directory: ./common
       - run: npm run migrate:dev
-        working-directory: /.backend
+        working-directory: ./backend
       - run: npm run test:db
         working-directory: ./backend
   lint:
