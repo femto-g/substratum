@@ -81,9 +81,9 @@ export default function Home() {
             <CardContent>
               <CardHeader>A modern development workflow</CardHeader>
               <CardText>
-                Streamline your development with Docker, Githooks, and Github
-                Actions CI to make building, testing, and deploying web
-                applications easier than ever.
+                Streamline your development with Docker, Jest, ESLint, Husky,
+                and Github Actions CI to make building, testing, and deploying
+                web applications easier than ever.
               </CardText>
               <CardFooter>Learn more</CardFooter>
             </CardContent>
