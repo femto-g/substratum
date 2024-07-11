@@ -1,3 +1,5 @@
+"use client";
+
 import Card from "@/components/card/Card";
 import CardContent from "@/components/card/CardContent";
 import CardHeader from "@/components/card/CardHeader";
@@ -8,10 +10,14 @@ import Image from "next/image";
 import IconImage from "@/components/image/IconImage";
 import icons from "@/assets/icons";
 import Link from "next/link";
+import useResponsiveRender from "@/hooks/useResponsiveRender";
+import useBreakpoint from "@/hooks/useBreakpoint";
 
 export default function Home() {
+  const render = useResponsiveRender();
+  const mediumScreen = useBreakpoint("md");
   return (
-    <div className="flex flex-col items-center gap-10">
+    <div className="w-full">
       <div className="flex flex-col items-center gap-10">
         <div className="flex flex-col items-center gap-5 pt-5">
           <h1 className="text-5xl font-bold text-center">
@@ -36,9 +42,9 @@ export default function Home() {
           </a>
         </div>
       </div>
-      <div className="flex flex-col gap-8 max-w-6xl mb-10">
-        <div className="flex flex-row gap-10">
-          <Card className="basis-0 grow">
+      <div className="flex flex-col items-center gap-8 mb-10 m-auto max-w-[90%] pt-10">
+        <div className="flex flex-col md:flex-row flex-wrap gap-10 max-w-screen-lg">
+          <Card className="w-[80%] md:flex-1 mx-auto md:min-h-full">
             <CardIcons>
               <IconImage src={icons.NEXT_JS} alt={"Nextjs"} />
               <IconImage src={icons.REACT} alt={"React"} />
@@ -54,7 +60,7 @@ export default function Home() {
               <CardFooter>Learn more</CardFooter>
             </CardContent>
           </Card>
-          <Card className="basis-0 grow">
+          <Card className="w-[80%] md:flex-1 mx-auto md:min-h-full">
             <CardIcons>
               <IconImage src={icons.EXPRESS} alt={"Express"} />
               <IconImage src={icons.TYPESCRIPT} alt={"Typescript"} />
@@ -72,7 +78,7 @@ export default function Home() {
           </Card>
         </div>
         <div>
-          <Card className="">
+          <Card className="w-[80%] m-auto">
             <CardIcons>
               <IconImage src={icons.DOCKER} alt={"Docker"} />
               <IconImage src={icons.JEST} alt={"Jest"} />

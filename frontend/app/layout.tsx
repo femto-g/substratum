@@ -18,9 +18,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={"overflow-x-hidden h-full " + inter.className}>
-      <body className="min-h-full relative overflow-x-hidden">
-        <div className="bg-gradient-to-r from-sky-50 to-indigo-50 h-full">
+    <html lang="en" className={"h-full " + inter.className}>
+      <body className="min-h-full">
+        <div className="bg-gradient-to-r from-sky-50 to-indigo-50 min-h-full relative overflow-hidden">
           <Nav />
           {children}
         </div>

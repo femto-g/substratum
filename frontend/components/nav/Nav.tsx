@@ -18,11 +18,18 @@ export default function Nav() {
   }, [path]);
 
   const [mobileNavVisible, setMobileNavVisible] = useState<boolean>(false);
+
+  useEffect(() => {
+    mobileNavVisible
+      ? (document.body.className = "min-h-full overflow-hidden")
+      : (document.body.className = "min-h-full");
+  }, [mobileNavVisible]);
+
   const toggleMobileNav = () => {
     setMobileNavVisible((visible) => !visible);
   };
   return (
-    <div className="overflow-x-hidden">
+    <div className="">
       <Navbar>
         <div className="basis-1/4">
           <Link href="/">
