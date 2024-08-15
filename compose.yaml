@@ -29,6 +29,14 @@ services:
         - action: rebuild
           path: ./frontend/package.json
           target: /root/frontend/package.json
+        - action: sync
+          path: ./common
+          target: /root/common
+          ignore:
+            - ./common/node_modules
+        - action: rebuild
+          path: ./common/package.json
+          target: /root/common/package.json
   backend:
     build:
       context: .
@@ -48,6 +56,14 @@ services:
         - action: rebuild
           path: ./backend/package.json
           target: /root/backend/package.json
+        - action: sync
+          path: ./common
+          target: /root/common
+          ignore:
+            - ./common/node_modules
+        - action: rebuild
+          path: ./common/package.json
+          target: /root/common/package.json
 
   db:
     image: postgres

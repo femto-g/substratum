@@ -12,9 +12,13 @@
     "*.{ts,tsx}": "eslint -c .eslintrc.json"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.9.0",
+    "@tanstack/react-query": "^5.51.23",
+    "@tanstack/react-query-devtools": "^5.51.23",
     "next": "14.2.4",
     "react": "^18",
     "react-dom": "^18",
+    "react-hook-form": "^7.52.1",
     "usehooks-ts": "^3.1.0"
   },
   "devDependencies": {

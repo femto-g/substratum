@@ -2,12 +2,16 @@
 
 import Navbar from "./Navbar";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import useBreakpoint from "@/hooks/useBreakpoint";
 import HamburgerButton from "../button/HamburgerButton";
 import IconImage from "../image/IconImage";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import useResponsiveRender from "@/hooks/useResponsiveRender";
+import { SessionContext } from "@/context/SessionContext";
+import LinkButton from "../button/LinkButton";
+import { logout } from "@/api/methods";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function Nav() {
   const responsive = useResponsiveRender();
@@ -21,13 +25,19 @@ export default function Nav() {
 
   useEffect(() => {
     mobileNavVisible
-      ? (document.body.className = "min-h-full overflow-hidden")
-      : (document.body.className = "min-h-full");
+      ? (document.body.className =
+          "min-h-full overflow-hidden bg-gradient-to-r from-sky-50 to-indigo-50")
+      : (document.body.className =
+          "min-h-full bg-gradient-to-r from-sky-50 to-indigo-50");
   }, [mobileNavVisible]);
 
   const toggleMobileNav = () => {
     setMobileNavVisible((visible) => !visible);
   };
+
+  const { isAuthenticated } = useContext(SessionContext);
+  const router = useRouter();
+  const queryClient = useQueryClient();
   return (
     <div className="">
       <Navbar>
@@ -50,11 +60,28 @@ export default function Nav() {
               <span className="flex flex-row justify-between">
                 <span className="flex gap-6">
                   <Link href={"/about"}>About</Link>
+                  <Link href={"/dashboard"}>Dashboard</Link>
                   <Link href={"/docs"}>Docs</Link>
                 </span>
                 <span className="flex gap-6">
-                  <Link href={"/signup"}>Sign Up</Link>
-                  <Link href={"/login"}>Log In</Link>
+                  {isAuthenticated ? (
+                    <button
+                      onClick={async () => {
+                        await logout();
+                        queryClient.invalidateQueries({
+                          queryKey: ["session"],
+                        });
+                        router.push("/");
+                      }}
+                    >
+                      Log Out
+                    </button>
+                  ) : (
+                    <>
+                      <Link href={"/signup"}>Sign Up</Link>
+                      <Link href={"/login"}>Log In</Link>
+                    </>
+                  )}
                 </span>
               </span>
             </div>
@@ -73,9 +100,25 @@ export default function Nav() {
           }
         >
           <Link href={"/about"}>About</Link>
+          <Link href={"/dashboard"}>Dashboard</Link>
           <Link href={"/docs"}>Docs</Link>
-          <Link href={"/signup"}>Sign Up</Link>
-          <Link href={"/login"}>Log In</Link>
+          {isAuthenticated ? (
+            <button
+              className="text-left"
+              onClick={async () => {
+                await logout();
+                queryClient.invalidateQueries({ queryKey: ["session"] });
+                router.push("/");
+              }}
+            >
+              Log Out
+            </button>
+          ) : (
+            <>
+              <Link href={"/signup"}>Sign Up</Link>
+              <Link href={"/login"}>Log In</Link>
+            </>
+          )}
         </span>
       ) : null}
     </div>

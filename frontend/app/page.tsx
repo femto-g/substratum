@@ -12,6 +12,7 @@ import icons from "@/assets/icons";
 import Link from "next/link";
 import useResponsiveRender from "@/hooks/useResponsiveRender";
 import useBreakpoint from "@/hooks/useBreakpoint";
+import Heading1 from "@/components/heading/Heading1";
 
 export default function Home() {
   const render = useResponsiveRender();
@@ -20,9 +21,7 @@ export default function Home() {
     <div className="w-full">
       <div className="flex flex-col items-center gap-10">
         <div className="flex flex-col items-center gap-5 pt-5">
-          <h1 className="text-5xl font-bold text-center">
-            Skip the boilerplate and start creating
-          </h1>
+          <Heading1>Skip the boilerplate and start creating</Heading1>
           <p className="text-2xl text-center">
             A full stack starter-kit to give you a headstart on your next
             project

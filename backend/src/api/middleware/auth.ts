@@ -42,6 +42,7 @@ export async function mockLogoutMiddleware(
   logout: (req: Request) => Promise<any>,
 ) {
   await logout(req);
+  return res.sendStatus(StatusCodes.OK);
 }
 
 export const logoutMiddleware = routeAsyncCatch(
